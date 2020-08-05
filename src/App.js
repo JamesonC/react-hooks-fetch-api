@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 const App = () => {
 
   const [data, setData] = useState({ hits: [] });
+  const [query, setQuery] = useState('React Hooks')
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch('https://hn.algolia.com/api/v1/search?query=reacthooks');
+      const result = await fetch(`https://hn.algolia.com/api/v1/search?query=${query}`);
 
       result
         .json()
@@ -14,7 +15,7 @@ const App = () => {
         .catch(e => console.log(e))
     }
     fetchData()
-  }, []);
+  }, [query]);
 
   console.log(data)
 
@@ -22,12 +23,13 @@ const App = () => {
     <div className="container">
       <h1>Fetch Data with React Hooks</h1>
 
-      <form>
+      <form onSubmit={event => event.preventDefault()}>
         <input 
         style={{ width: 300 }}
+        placeholder="Search for Articles..." 
         type="text" 
         id="name" 
-        placeholder="Search for Articles..." 
+        onChange={event => setQuery(event.target.value)}
          />
       </form>
 
