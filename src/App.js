@@ -21,6 +21,16 @@ const App = () => {
   return (
     <div className="container">
       <h1>Fetch Data with React Hooks</h1>
+
+      <form>
+        <input 
+        style={{ width: 300 }}
+        type="text" 
+        id="name" 
+        placeholder="Search for Articles..." 
+         />
+      </form>
+
       <div className="contain-table">
         <table>
           <thead>
