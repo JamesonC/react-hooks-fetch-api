@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const App = () => {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ hits: [] });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +16,7 @@ const App = () => {
     fetchData()
   }, []);
 
-  console.log(data) 
+  console.log(data)
 
   return (
     <div className="container">
@@ -31,13 +31,15 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Title 1</td>
-              <td>Author 1</td>
-              <td>
-                <a className="button" target='_blank' href='https://www.google.com/' rel="noopener noreferrer">Read</a>
-              </td>
-            </tr>
+            {data.hits.map(item =>
+              <tr key={item.objectID}>
+                <td>{item.title}</td>
+                <td>{item.author}</td>
+                <td>
+                  <a className="button" target='_blank' href={item.url} rel="noopener noreferrer">Read</a>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
